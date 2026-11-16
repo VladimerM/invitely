@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
-import { OCCASION_OPTIONS } from '../../data/occasions';
+import { OCCASION_FILTERS } from '../../data/occasions';
 import { ShowcaseStore } from '../../state/showcase-store';
 import { ThemeCard } from './theme-card';
 
@@ -12,6 +13,7 @@ import { ThemeCard } from './theme-card';
   styleUrl: './showcase-section.scss',
 })
 export class ShowcaseSection {
+  protected readonly t = inject(I18n).t;
   protected readonly store = inject(ShowcaseStore);
-  protected readonly occasionOptions = OCCASION_OPTIONS;
+  protected readonly occasionFilters = OCCASION_FILTERS;
 }

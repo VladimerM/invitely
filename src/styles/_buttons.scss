@@ -10,7 +10,7 @@
   background: transparent;
   font-size: 15px;
   letter-spacing: 0.04em;
-  line-height: 1.2;
+  line-height: calc(1.2 * var(--leading-scale));
   white-space: nowrap;
   cursor: pointer;
   transition:

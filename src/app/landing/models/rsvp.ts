@@ -9,10 +9,18 @@ export interface RsvpReply {
 /** A reply as the host sees it on their guest list. */
 export interface RsvpResponse {
   readonly id: number;
+  /** Empty when the guest left their name blank. */
   readonly name: string;
   readonly attending: boolean;
   /** Party size; 0 when declined. */
   readonly guests: number;
   readonly note: string;
-  readonly receivedLabel: string;
+  /** How long ago the reply arrived; formatted per language ("2 hours ago", "yesterday"). */
+  readonly receivedHoursAgo: number;
+}
+
+/** A sample reply's language-specific text. */
+export interface RsvpSampleCopy {
+  readonly name: string;
+  readonly note: string;
 }

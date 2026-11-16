@@ -21,10 +21,11 @@
   --color-line-light: rgba(237, 227, 211, 0.35);
 
   // Typography
-  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Jost', 'Noto Serif Georgian', system-ui, sans-serif;
-  --font-georgian: 'Noto Serif Georgian', serif;
+  --font-display: 'Cormorant Garamond', 'Georgian Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Jost', 'Georgian Text', system-ui, sans-serif;
   --font-mono: ui-monospace, Menlo, Consolas, monospace;
+  // Multiplies every line-height; see the Georgian override in _fonts.scss.
+  --leading-scale: 1;
 
   // Layout
   --container-width: 1240px;

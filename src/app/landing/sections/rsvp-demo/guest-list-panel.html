@@ -1,23 +1,24 @@
+@let text = t().rsvp.list;
 <header class="toolbar">
   <div class="toolbar__title">
-    <h3 class="toolbar__heading">Nino &amp; Giorgi · Guest list</h3>
-    <span class="toolbar__meta">Private host page · updates live</span>
+    <h3 class="toolbar__heading">{{ text.heading }}</h3>
+    <span class="toolbar__meta">{{ text.meta }}</span>
   </div>
-  <span class="toolbar__export">Export to Excel</span>
+  <span class="toolbar__export">{{ text.export }}</span>
 </header>
 
 @let totals = stats();
 <dl class="stats">
   <div class="stat">
-    <dt class="stat__label">Guests attending</dt>
+    <dt class="stat__label">{{ text.guestsAttending }}</dt>
     <dd class="stat__value">{{ totals.guests }}</dd>
   </div>
   <div class="stat">
-    <dt class="stat__label">Replies</dt>
+    <dt class="stat__label">{{ text.replies }}</dt>
     <dd class="stat__value">{{ totals.replies }}</dd>
   </div>
   <div class="stat">
-    <dt class="stat__label">Declined</dt>
+    <dt class="stat__label">{{ text.declined }}</dt>
     <dd class="stat__value">{{ totals.declined }}</dd>
   </div>
 </dl>
@@ -26,11 +27,11 @@
   @for (response of responses(); track response.id) {
     <li class="row" [class.is-highlighted]="response.id === highlightedId()">
       <div class="row__who">
-        <span class="row__name">{{ response.name }}</span>
-        <span class="row__when">{{ response.receivedLabel }}</span>
+        <span class="row__name">{{ response.name || text.anonymous }}</span>
+        <span class="row__when">{{ i18n.formatHoursAgo(response.receivedHoursAgo) }}</span>
       </div>
       <span class="row__status" [class.is-attending]="response.attending">
-        {{ response.attending ? 'Attending' : 'Declined' }}
+        {{ response.attending ? text.attending : text.notAttending }}
       </span>
       <span class="row__count">{{ response.attending ? response.guests : '—' }}</span>
       <span class="row__note">{{ response.note || '—' }}</span>

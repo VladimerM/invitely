@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 import { PRICING_PACKAGES } from '../../data/content';
 
@@ -10,5 +11,9 @@ import { PRICING_PACKAGES } from '../../data/content';
   styleUrl: './pricing-section.scss',
 })
 export class PricingSection {
-  protected readonly packages = PRICING_PACKAGES;
+  protected readonly t = inject(I18n).t;
+  protected readonly packages = computed(() => {
+    const copy = this.t().pricing.packages;
+    return PRICING_PACKAGES.map((base) => ({ ...base, ...copy[base.id] }));
+  });
 }

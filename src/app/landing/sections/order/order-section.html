@@ -1,13 +1,12 @@
+@let text = t().order;
 <div class="container layout">
   <div class="pitch">
     <img class="mark" ngSrc="assets/mark-light.png" width="286" height="242" alt="" />
-    <h2 class="display headline">Let’s create your <em>invitation.</em></h2>
-    <p class="pitch__text">
-      Message us directly — we usually reply within the hour, in Georgian or English.
-    </p>
+    <h2 class="display headline">{{ text.headline.lead }} <em>{{ text.headline.em }}</em></h2>
+    <p class="pitch__text">{{ text.pitch }}</p>
     @if (showMessaging) {
       <div class="channels">
-        @for (channel of channels; track channel.label) {
+        @for (channel of channels; track channel.id) {
           <a
             class="btn channel"
             [class.btn--gold]="channel.primary"
@@ -15,7 +14,7 @@
             [class.channel--primary]="channel.primary"
             [href]="channel.href"
           >
-            {{ channel.label }}
+            {{ text.channels[channel.id] }}
           </a>
         }
       </div>
@@ -27,43 +26,41 @@
       @if (order.isSent()) {
         <div class="sent" role="status">
           <span class="diamond sent__diamond" aria-hidden="true"></span>
-          <span class="sent__title">Thank you, {{ order.firstName() }}.</span>
-          <span class="sent__text">
-            We’ll call or message you shortly to talk through your {{ order.eventLabel() }}.
-          </span>
+          <span class="sent__title">{{ text.thanks(order.firstName() || text.friend) }}</span>
+          <span class="sent__text">{{ text.sent(order.event()) }}</span>
         </div>
       } @else {
         <form class="form" [formRoot]="orderForm" aria-labelledby="order-form-title">
-          <h3 class="form__title" id="order-form-title">Or leave your details</h3>
+          <h3 class="form__title" id="order-form-title">{{ text.formTitle }}</h3>
 
           @let name = orderForm.name();
           <label class="field">
-            Your name
+            {{ text.name }}
             <input
               class="field__control"
               type="text"
               autocomplete="name"
-              placeholder="Nino Beridze"
+              [placeholder]="text.namePlaceholder"
               [formField]="orderForm.name"
               [class.is-invalid]="name.touched() && name.invalid()"
               aria-describedby="order-name-error"
             />
             @if (name.touched() && name.invalid()) {
-              <span class="field__error" id="order-name-error">{{ name.errors()[0].message }}</span>
+              <span class="field__error" id="order-name-error">{{ text.nameRequired }}</span>
             }
           </label>
 
           <div class="field-row">
             <label class="field">
-              Event type
+              {{ text.eventType }}
               <select class="field__control" [formField]="orderForm.event">
                 @for (occasion of occasions; track occasion) {
-                  <option [value]="occasion">{{ occasion }}</option>
+                  <option [value]="occasion">{{ t().occasions[occasion] }}</option>
                 }
               </select>
             </label>
             <label class="field">
-              Event date
+              {{ text.eventDate }}
               <input
                 class="field__control field__control--date"
                 type="date"
@@ -74,7 +71,7 @@
 
           @let phone = orderForm.phone();
           <label class="field">
-            Phone
+            {{ text.phone }}
             <input
               class="field__control"
               type="tel"
@@ -85,17 +82,15 @@
               aria-describedby="order-phone-error"
             />
             @if (phone.touched() && phone.invalid()) {
-              <span class="field__error" id="order-phone-error">{{
-                phone.errors()[0].message
-              }}</span>
+              <span class="field__error" id="order-phone-error">{{ text.phoneRequired }}</span>
             }
           </label>
 
           @if (order.chosenStyle(); as style) {
-            <span class="form__style">Style: {{ style }}</span>
+            <span class="form__style">{{ text.style(styleName(style)) }}</span>
           }
 
-          <button type="submit" class="btn btn--block submit">Request my invitation</button>
+          <button type="submit" class="btn btn--block submit">{{ text.submit }}</button>
         </form>
       }
     </div>

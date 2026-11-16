@@ -1,10 +1,4 @@
-import { OccasionOption } from '../models/occasion';
+import { OCCASIONS, OccasionFilter } from '../models/occasion';
 
-export const OCCASION_OPTIONS: readonly OccasionOption[] = [
-  { value: 'All', labelKa: 'ყველა' },
-  { value: 'Wedding', labelKa: 'ქორწილი' },
-  { value: 'Birthday', labelKa: 'დაბადების დღე' },
-  { value: 'Christening', labelKa: 'ნათლობა' },
-  { value: 'Engagement', labelKa: 'ნიშნობა' },
-  { value: 'Anniversary', labelKa: 'წლისთავი' },
-];
+/** Showcase filter buttons, in display order. Labels come from the active language. */
+export const OCCASION_FILTERS: readonly OccasionFilter[] = ['All', ...OCCASIONS];

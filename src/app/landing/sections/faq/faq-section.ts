@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
-import { FAQ_ENTRIES } from '../../data/content';
 
 /** Accordion where at most one answer is open at a time. */
 @Component({
@@ -11,7 +11,7 @@ import { FAQ_ENTRIES } from '../../data/content';
   styleUrl: './faq-section.scss',
 })
 export class FaqSection {
-  protected readonly entries = FAQ_ENTRIES;
+  protected readonly t = inject(I18n).t;
   protected readonly openIndex = signal<number | null>(0);
 
   protected toggle(index: number): void {

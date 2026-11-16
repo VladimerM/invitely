@@ -84,3 +84,10 @@ textarea:focus {
     animation-duration: 0.01ms !important;
   }
 }
+
+// Georgian has no conventional capital letters for running text: CSS uppercase maps
+// it to Mtavruli, which most fonts lack (rendering as boxes). Keep the original letters.
+// !important because component styles (higher specificity) set the transform.
+:root:lang(ka) * {
+  text-transform: none !important;
+}

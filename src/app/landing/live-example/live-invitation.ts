@@ -2,12 +2,14 @@ import {
   Component,
   ElementRef,
   afterRenderEffect,
+  inject,
   input,
   linkedSignal,
   signal,
   viewChild,
 } from '@angular/core';
 
+import { I18n } from '../../core/i18n/i18n';
 import { CountdownTiles } from '../../shared/ui/countdown-tiles/countdown-tiles';
 import { InvitationTheme } from '../models/invitation-theme';
 
@@ -30,6 +32,8 @@ type RsvpAnswer = 'accept' | 'decline';
   },
 })
 export class LiveInvitation {
+  protected readonly t = inject(I18n).t;
+
   readonly theme = input.required<InvitationTheme>();
 
   /** Whether the envelope cover has been lifted. Resets for every style. */

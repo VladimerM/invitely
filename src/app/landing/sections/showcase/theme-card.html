@@ -3,7 +3,7 @@
   type="button"
   class="cover"
   (click)="view.emit()"
-  [attr.aria-label]="'Open the ' + theme().name + ' live example'"
+  [attr.aria-label]="t().showcase.openLive(theme().name)"
 >
   <span class="cover__frame" aria-hidden="true"></span>
   <span class="cover__content">
@@ -21,9 +21,9 @@
 <div class="caption">
   <div class="caption__text">
     <h3 class="caption__name">{{ theme().name }}</h3>
-    <span class="caption__occasion">{{ occasion() }}</span>
+    <span class="caption__occasion">{{ t().occasions[occasion()] }}</span>
   </div>
   <button type="button" class="btn btn--outline-light view" (click)="view.emit()">
-    View live example
+    {{ t().showcase.viewLive }}
   </button>
 </div>

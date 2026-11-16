@@ -1,11 +1,12 @@
 @let sample = theme().sample;
+@let text = t().invitation;
 <button
   type="button"
   class="music"
   [attr.aria-pressed]="musicOn()"
   (click)="musicOn.set(!musicOn())"
 >
-  ♪ Music {{ musicOn() ? 'on' : 'off' }}
+  {{ text.music(musicOn()) }}
 </button>
 
 <div #scroller class="scroller" [attr.inert]="coverOpen() ? null : ''">
@@ -23,12 +24,12 @@
   <div class="photo-placeholder photo">{{ sample.photoCaption }}</div>
 
   <section class="block block--countdown">
-    <span class="kicker">Counting down</span>
+    <span class="kicker">{{ text.countingDown }}</span>
     <app-countdown-tiles [target]="sample.startsAt" />
   </section>
 
   <section class="block block--schedule">
-    <span class="kicker">The day</span>
+    <span class="kicker">{{ text.theDay }}</span>
     @for (item of sample.schedule; track item.time) {
       <div class="schedule-item">
         <span class="schedule-item__time">{{ item.time }}</span>
@@ -38,14 +39,14 @@
   </section>
 
   <section class="block block--venue">
-    <div class="map">venue map</div>
+    <div class="map">{{ text.venueMap }}</div>
     <span class="venue-name">{{ sample.venue }}</span>
-    <span class="maps-link">Open in Maps</span>
+    <span class="maps-link">{{ text.openInMaps }}</span>
   </section>
 
   <section class="block block--rsvp">
-    <span class="rsvp-question">Will you join us?</span>
-    <span class="rsvp-deadline">Kindly reply by {{ sample.replyBy }}</span>
+    <span class="rsvp-question">{{ t().common.willYouJoin }}</span>
+    <span class="rsvp-deadline">{{ t().common.replyBy(sample.replyBy) }}</span>
     <div class="rsvp-choices">
       <button
         type="button"
@@ -54,7 +55,7 @@
         [attr.aria-pressed]="answer() === 'accept'"
         (click)="answer.set('accept')"
       >
-        Accept
+        {{ text.accept }}
       </button>
       <button
         type="button"
@@ -63,12 +64,12 @@
         [attr.aria-pressed]="answer() === 'decline'"
         (click)="answer.set('decline')"
       >
-        Decline
+        {{ text.decline }}
       </button>
     </div>
   </section>
 
-  <p class="credit">Made by Invitely</p>
+  <p class="credit">{{ text.credit }}</p>
 </div>
 
 <button
@@ -78,8 +79,8 @@
   [attr.inert]="coverOpen() ? '' : null"
   (click)="coverOpen.set(true)"
 >
-  <span class="kicker">You are invited</span>
+  <span class="kicker">{{ text.youAreInvited }}</span>
   <span class="cover__seal">{{ sample.monogram }}</span>
   <span class="cover__names">{{ sample.first }} {{ sample.joiner }} {{ sample.second }}</span>
-  <span class="cover__open">Open invitation</span>
+  <span class="cover__open">{{ text.open }}</span>
 </button>

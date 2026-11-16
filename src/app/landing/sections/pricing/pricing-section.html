@@ -1,14 +1,15 @@
+@let text = t().pricing;
 <div class="container section">
   <div class="heading">
-    <app-eyebrow centered>Packages</app-eyebrow>
-    <h2 class="display">Clear prices, <em>no surprises.</em></h2>
+    <app-eyebrow centered>{{ text.eyebrow }}</app-eyebrow>
+    <h2 class="display">{{ text.title.lead }} <em>{{ text.title.em }}</em></h2>
   </div>
 
   <div class="packages">
-    @for (pkg of packages; track pkg.name) {
+    @for (pkg of packages(); track pkg.id) {
       <article class="package" [class.package--featured]="pkg.featured">
         @if (pkg.featured) {
-          <span class="badge">Most chosen</span>
+          <span class="badge">{{ text.mostChosen }}</span>
         }
         <header class="package__header">
           <h3 class="package__name">{{ pkg.name }}</h3>
@@ -16,7 +17,7 @@
         </header>
         <p class="price">
           <span class="price__amount">{{ pkg.price }}</span>
-          <span class="price__currency" aria-label="lari">₾</span>
+          <span class="price__currency" [attr.aria-label]="text.currencyLabel">₾</span>
         </p>
         <ul class="features">
           @for (feature of pkg.features; track feature) {
@@ -29,7 +30,7 @@
           [class.btn--gold]="pkg.featured"
           [class.btn--outline]="!pkg.featured"
         >
-          Choose {{ pkg.name }}
+          {{ text.choose(pkg.name) }}
         </a>
       </article>
     }

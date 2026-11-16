@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
-import { INCLUDED_FEATURES } from '../../data/content';
 
 @Component({
   selector: 'app-included-section',
   imports: [Eyebrow],
   template: `
+    @let text = t().included;
     <div class="container layout">
       <div class="section-intro__heading">
-        <app-eyebrow tone="taupe">What’s included</app-eyebrow>
-        <h2 class="display title">Everything your guests need, in one link.</h2>
+        <app-eyebrow tone="taupe">{{ text.eyebrow }}</app-eyebrow>
+        <h2 class="display title">{{ text.title }}</h2>
       </div>
       <ul class="features">
-        @for (feature of features; track feature.title) {
+        @for (feature of text.features; track feature.title) {
           <li class="feature">
             <span class="diamond" aria-hidden="true"></span>
             <div class="feature__text">
@@ -72,17 +73,17 @@ import { INCLUDED_FEATURES } from '../../data/content';
     .feature__title {
       font-family: var(--font-display);
       font-size: 22px;
-      line-height: 1.2;
+      line-height: calc(1.2 * var(--leading-scale));
     }
 
     .feature__description {
       font-size: 14px;
-      line-height: 1.55;
+      line-height: calc(1.55 * var(--leading-scale));
       font-weight: 300;
       color: var(--color-body);
     }
   `,
 })
 export class IncludedSection {
-  protected readonly features = INCLUDED_FEATURES;
+  protected readonly t = inject(I18n).t;
 }

@@ -1,5 +1,6 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 import { PhoneFrame } from '../../../shared/ui/phone-frame/phone-frame';
 import { SAMPLE_RSVP_RESPONSES } from '../../data/rsvp-responses';
@@ -17,7 +18,18 @@ const HIGHLIGHT_MS = 2500;
   styleUrl: './rsvp-demo-section.scss',
 })
 export class RsvpDemoSection {
-  protected readonly responses = signal<readonly RsvpResponse[]>(SAMPLE_RSVP_RESPONSES);
+  protected readonly t = inject(I18n).t;
+
+  /** Replies sent from the demo card this visit, newest first. Kept as typed, in any language. */
+  private readonly added = signal<readonly RsvpResponse[]>([]);
+
+  protected readonly responses = computed<readonly RsvpResponse[]>(() => {
+    const samples = this.t().rsvp.samples;
+    return [
+      ...this.added(),
+      ...SAMPLE_RSVP_RESPONSES.map((sample, i) => ({ ...sample, ...samples[i] })),
+    ];
+  });
   protected readonly highlightedId = signal<number | null>(null);
 
   private nextId = SAMPLE_RSVP_RESPONSES.length + 1;
@@ -28,8 +40,8 @@ export class RsvpDemoSection {
   }
 
   protected addResponse(reply: RsvpReply): void {
-    const response: RsvpResponse = { ...reply, id: this.nextId++, receivedLabel: 'Just now' };
-    this.responses.update((responses) => [response, ...responses]);
+    const response: RsvpResponse = { ...reply, id: this.nextId++, receivedHoursAgo: 0 };
+    this.added.update((added) => [response, ...added]);
 
     this.highlightedId.set(response.id);
     clearTimeout(this.highlightTimer);

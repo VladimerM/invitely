@@ -1,5 +1,6 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { RsvpResponse } from '../../models/rsvp';
 
 /** The host's private dashboard: totals plus every reply received. */
@@ -9,6 +10,9 @@ import { RsvpResponse } from '../../models/rsvp';
   styleUrl: './guest-list-panel.scss',
 })
 export class GuestListPanel {
+  protected readonly i18n = inject(I18n);
+  protected readonly t = this.i18n.t;
+
   readonly responses = input.required<readonly RsvpResponse[]>();
   /** Reply to flash briefly, e.g. one that just arrived. */
   readonly highlightedId = input<number | null>(null);

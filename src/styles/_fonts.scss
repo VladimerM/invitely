@@ -1,0 +1,39 @@
+// Noto Serif Georgian (SIL Open Font License), self-hosted so it can be size-matched.
+//
+// Georgian letters are much taller than Latin ones at the same font-size (body height
+// 0.55em vs Cormorant's 0.40em and Jost's 0.47em), so unscaled Georgian looks oversized.
+// The same file is registered twice with a different `size-adjust`, one per role, scaled
+// so Georgian ascenders line up with the Latin capitals of the font it stands in for.
+// `unicode-range` limits both to Georgian, so Latin and Cyrillic text are untouched.
+
+$georgian-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2D2F, U+2E31;
+
+// Beside Cormorant Garamond (headlines, names): ascender 0.78em → cap height ≈ 0.63em.
+@font-face {
+  font-family: 'Georgian Display';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/assets/fonts/noto-serif-georgian.woff2') format('woff2');
+  unicode-range: $georgian-range;
+  size-adjust: 70%;
+}
+
+// Beside Jost (body, labels, buttons): ascender 0.78em → cap height ≈ 0.70em.
+@font-face {
+  font-family: 'Georgian Text';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/assets/fonts/noto-serif-georgian.woff2') format('woff2');
+  unicode-range: $georgian-range;
+  size-adjust: 90%;
+}
+
+// `size-adjust` shrinks the glyphs but not CSS line-heights, which are set relative to
+// font-size, so scaled-down Georgian would sit in over-tall lines. Tighten all leading to
+// match the body scale. Not lower: at 0.9 the tightest headline leading (0.98 → 0.88)
+// still clears Georgian's full ascender-to-descender extent (≈ 0.83em at 80%).
+:root:lang(ka) {
+  --leading-scale: 0.9;
+}

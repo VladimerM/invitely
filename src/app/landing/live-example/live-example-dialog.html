@@ -1,3 +1,4 @@
+@let text = t().liveExample;
 <div class="backdrop" (click)="onBackdropClick($event)">
   <div
     #dialog
@@ -8,23 +9,23 @@
     tabindex="-1"
   >
     <div class="details">
-      <span class="details__kicker">{{ occasion() }} · Live example</span>
+      <span class="details__kicker">{{ text.kicker(t().occasions[occasion()]) }}</span>
       <h2 class="details__name" id="live-example-title">{{ theme().name }}</h2>
       <p class="details__description">{{ theme().description }}</p>
-      <div class="swatches" role="img" aria-label="Colour palette">
+      <div class="swatches" role="img" [attr.aria-label]="text.paletteLabel">
         <span class="swatch" [style.background]="theme().palette.background"></span>
         <span class="swatch" [style.background]="theme().palette.ink"></span>
         <span class="swatch" [style.background]="theme().palette.accent"></span>
       </div>
-      <span class="details__hint">Tap the invitation to open it, then scroll.</span>
+      <span class="details__hint">{{ text.hint }}</span>
       <div class="details__actions">
         <button type="button" class="btn btn--gold order" (click)="orderStyle.emit()">
-          Order this style
+          {{ text.order }}
         </button>
-        <button type="button" class="nav" aria-label="Previous style" (click)="previous.emit()">
+        <button type="button" class="nav" [attr.aria-label]="text.previous" (click)="previous.emit()">
           ←
         </button>
-        <button type="button" class="nav" aria-label="Next style" (click)="next.emit()">→</button>
+        <button type="button" class="nav" [attr.aria-label]="text.next" (click)="next.emit()">→</button>
       </div>
     </div>
 
@@ -33,5 +34,5 @@
     </app-phone-frame>
   </div>
 
-  <button type="button" class="close" (click)="closed.emit()">Close ✕</button>
+  <button type="button" class="close" (click)="closed.emit()">{{ text.close }} ✕</button>
 </div>

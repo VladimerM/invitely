@@ -45,7 +45,7 @@ export class LandingPage {
 
   /** Carries the open style into the order form and brings the form into view. */
   protected orderStyle(theme: InvitationTheme): void {
-    this.order.chooseStyle(theme.name, this.showcase.occasionFor(theme));
+    this.order.chooseStyle(theme.id, this.showcase.occasionFor(theme));
     this.showcase.closeLive();
 
     // Wait for the dialog to unmount (and release its scroll lock) before scrolling.

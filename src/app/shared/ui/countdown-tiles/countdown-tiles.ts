@@ -1,5 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Clock } from '../../../core/time/clock';
 import { countdownTo } from '../../../core/time/countdown';
 
@@ -8,14 +9,15 @@ import { countdownTo } from '../../../core/time/countdown';
   selector: 'app-countdown-tiles',
   template: `
     @let remaining = countdown();
+    @let text = t().countdown;
     <div class="tile">
-      <span class="value">{{ remaining.days }}</span><span class="unit">days</span>
+      <span class="value">{{ remaining.days }}</span><span class="unit">{{ text.days }}</span>
     </div>
     <div class="tile">
-      <span class="value">{{ pad(remaining.hours) }}</span><span class="unit">hours</span>
+      <span class="value">{{ pad(remaining.hours) }}</span><span class="unit">{{ text.hours }}</span>
     </div>
     <div class="tile">
-      <span class="value">{{ pad(remaining.minutes) }}</span><span class="unit">min</span>
+      <span class="value">{{ pad(remaining.minutes) }}</span><span class="unit">{{ text.minutes }}</span>
     </div>
   `,
   styleUrl: './countdown-tiles.scss',
@@ -27,6 +29,7 @@ import { countdownTo } from '../../../core/time/countdown';
 })
 export class CountdownTiles {
   private readonly clock = inject(Clock);
+  protected readonly t = inject(I18n).t;
 
   /** ISO date-time to count down to. */
   readonly target = input.required<string>();
@@ -35,7 +38,7 @@ export class CountdownTiles {
   protected readonly countdown = computed(() => countdownTo(this.target(), this.clock.now()));
   protected readonly ariaLabel = computed(() => {
     const { days, hours, minutes } = this.countdown();
-    return `${days} days, ${hours} hours and ${minutes} minutes to go`;
+    return this.t().countdown.label(days, hours, minutes);
   });
 
   protected pad(value: number): string {

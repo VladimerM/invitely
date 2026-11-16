@@ -41,7 +41,7 @@
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(48px, 6.4vw, 88px);
-  line-height: 0.98;
+  line-height: calc(0.98 * var(--leading-scale));
   letter-spacing: -0.015em;
   text-wrap: balance;
 
@@ -55,7 +55,7 @@
   max-width: 480px;
   margin: 0;
   font-size: clamp(17px, 1.5vw, 19px);
-  line-height: 1.6;
+  line-height: calc(1.6 * var(--leading-scale));
   font-weight: 300;
   color: var(--color-body);
   text-wrap: pretty;

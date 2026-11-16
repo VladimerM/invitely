@@ -1,11 +1,12 @@
+@let text = t().faq;
 <div class="container section layout">
   <div class="section-intro__heading">
-    <app-eyebrow>Questions</app-eyebrow>
-    <h2 class="display title">Good to know.</h2>
+    <app-eyebrow>{{ text.eyebrow }}</app-eyebrow>
+    <h2 class="display title">{{ text.title }}</h2>
   </div>
 
   <div class="entries">
-    @for (entry of entries; track entry.question; let i = $index) {
+    @for (entry of text.entries; track $index; let i = $index) {
       @let expanded = openIndex() === i;
       <div class="entry">
         <h3 class="entry__heading">

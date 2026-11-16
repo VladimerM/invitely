@@ -48,7 +48,7 @@
   font-family: var(--font-display);
   font-style: italic;
   font-size: 48px;
-  line-height: 1;
+  line-height: calc(1 * var(--leading-scale));
 
   .joiner {
     font-size: 0.7em;
@@ -245,7 +245,7 @@
   font-family: var(--font-display);
   font-style: italic;
   font-size: 32px;
-  line-height: 1.1;
+  line-height: calc(1.1 * var(--leading-scale));
 }
 
 .cover__open {

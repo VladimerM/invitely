@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { InvitationTheme } from '../../models/invitation-theme';
 import { Occasion } from '../../models/occasion';
 
@@ -15,6 +16,8 @@ import { Occasion } from '../../models/occasion';
   },
 })
 export class ThemeCard {
+  protected readonly t = inject(I18n).t;
+
   readonly theme = input.required<InvitationTheme>();
   readonly occasion = input.required<Occasion>();
   readonly view = output<void>();

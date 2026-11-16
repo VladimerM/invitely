@@ -49,3 +49,31 @@
     display: none;
   }
 }
+
+.languages {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.languages__option {
+  padding: 6px 7px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: var(--color-ink);
+  }
+
+  &.is-selected {
+    border-bottom-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+}

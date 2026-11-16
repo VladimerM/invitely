@@ -1,6 +1,9 @@
+@let text = t().rsvp.card;
 <header class="intro">
-  <span class="intro__deadline">Kindly reply by 1 May</span>
-  <span class="intro__question">Will you join us?</span>
+  <span class="intro__deadline">{{
+    t().common.replyBy(i18n.formatDate(replyBy, { day: 'numeric', month: 'long' }))
+  }}</span>
+  <span class="intro__question">{{ t().common.willYouJoin }}</span>
 </header>
 
 @if (confirmation(); as confirmation) {
@@ -8,18 +11,18 @@
     <span class="diamond thanks__diamond" aria-hidden="true"></span>
     <span class="thanks__title">
       @if (confirmation.firstName) {
-        Thank you,<br />{{ confirmation.firstName }}
+        {{ text.thanks }}<br />{{ confirmation.firstName }}
       } @else {
-        Thank you!
+        {{ text.thanksAnonymous }}
       }
     </span>
-    <span class="thanks__text">Your reply has reached Nino &amp; Giorgi.</span>
-    <button type="button" class="thanks__again" (click)="startOver()">Send another reply</button>
+    <span class="thanks__text">{{ text.reached }}</span>
+    <button type="button" class="thanks__again" (click)="startOver()">{{ text.again }}</button>
   </div>
 } @else {
   @let attending = reply().attending;
   <form class="reply" [formRoot]="replyForm">
-    <div class="choice" role="group" aria-label="Your answer">
+    <div class="choice" role="group" [attr.aria-label]="text.answerLabel">
       <button
         type="button"
         class="choice__option"
@@ -27,7 +30,7 @@
         [attr.aria-pressed]="attending"
         (click)="setAttending(true)"
       >
-        Joyfully accept
+        {{ text.accept }}
       </button>
       <button
         type="button"
@@ -36,29 +39,29 @@
         [attr.aria-pressed]="!attending"
         (click)="setAttending(false)"
       >
-        Regretfully decline
+        {{ text.decline }}
       </button>
     </div>
 
     <label class="field">
-      Your name
+      {{ text.name }}
       <input
         class="field__input"
         type="text"
         autocomplete="name"
-        placeholder="e.g. Tamar Kvaratskhelia"
+        [placeholder]="text.namePlaceholder"
         [formField]="replyForm.name"
       />
     </label>
 
     @if (attending) {
       <div class="guests">
-        <span class="field" id="guest-count-label">Number of guests</span>
+        <span class="field" id="guest-count-label">{{ text.guestCount }}</span>
         <div class="stepper" role="group" aria-labelledby="guest-count-label">
           <button
             type="button"
             class="stepper__button"
-            aria-label="One fewer guest"
+            [attr.aria-label]="text.fewer"
             [disabled]="reply().guests <= minGuests"
             (click)="changeGuests(-1)"
           >
@@ -68,7 +71,7 @@
           <button
             type="button"
             class="stepper__button"
-            aria-label="One more guest"
+            [attr.aria-label]="text.more"
             [disabled]="reply().guests >= maxGuests"
             (click)="changeGuests(1)"
           >
@@ -79,15 +82,15 @@
     }
 
     <label class="field">
-      A note for the couple
+      {{ text.note }}
       <textarea
         class="field__note"
         rows="3"
-        placeholder="Dietary needs, song requests, wishes…"
+        [placeholder]="text.notePlaceholder"
         [formField]="replyForm.note"
       ></textarea>
     </label>
 
-    <button type="submit" class="btn btn--ink btn--block send">Send reply</button>
+    <button type="submit" class="btn btn--ink btn--block send">{{ text.send }}</button>
   </form>
 }

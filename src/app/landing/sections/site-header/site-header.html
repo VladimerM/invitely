@@ -1,11 +1,29 @@
+@let text = t().header;
 <div class="container bar">
-  <a href="#top" class="brand" aria-label="Invitely, back to top">
+  <a href="#top" class="brand" [attr.aria-label]="text.homeLabel">
     <img ngSrc="assets/wordmark.png" alt="Invitely" width="725" height="230" priority />
   </a>
-  <nav class="nav" aria-label="Main">
+  <nav class="nav" [attr.aria-label]="text.navLabel">
     @for (link of links; track link.href) {
-      <a class="nav__link" [href]="link.href">{{ link.label }}</a>
+      <a class="nav__link" [href]="link.href">{{ text.links[link.key] }}</a>
     }
-    <a href="#order" class="btn btn--ink order">Order</a>
+    <div class="languages" role="group" [attr.aria-label]="text.languageLabel">
+      @for (language of languages; track language) {
+        @let label = languageLabels[language];
+        <button
+          type="button"
+          class="languages__option"
+          [class.is-selected]="i18n.language() === language"
+          [attr.aria-pressed]="i18n.language() === language"
+          [attr.aria-label]="label.name"
+          [attr.lang]="language"
+          [title]="label.name"
+          (click)="i18n.setLanguage(language)"
+        >
+          {{ label.short }}
+        </button>
+      }
+    </div>
+    <a href="#order" class="btn btn--ink order">{{ text.order }}</a>
   </nav>
 </div>

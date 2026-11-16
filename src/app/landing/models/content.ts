@@ -9,35 +9,51 @@ export interface IncludedFeature {
   readonly description: string;
 }
 
-export interface PricingPackage {
-  readonly name: string;
-  readonly tagline: string;
+export type PackageId = 'classic' | 'premium' | 'exclusive';
+
+export interface PricingPackageBase {
+  readonly id: PackageId;
   /** Price in Georgian lari. */
   readonly price: number;
-  readonly features: readonly string[];
   readonly featured: boolean;
 }
 
-export interface Photo {
-  readonly url: string;
-  readonly alt: string;
-  /** Photographer attribution, shown on the image. */
-  readonly credit: string;
+export interface PricingPackageCopy {
+  readonly name: string;
+  readonly tagline: string;
+  readonly features: readonly string[];
 }
 
-export interface Testimonial {
+export type PricingPackage = PricingPackageBase & PricingPackageCopy;
+
+export type TestimonialId = 'nino-giorgi' | 'tamar-levan' | 'keti';
+
+export interface TestimonialBase {
+  readonly id: TestimonialId;
+  readonly photo: {
+    readonly url: string;
+    /** Photographer attribution, shown on the image. */
+    readonly credit: string;
+  };
+}
+
+export interface TestimonialCopy {
   readonly quote: string;
   readonly author: string;
-  readonly photo: Photo;
+  readonly photoAlt: string;
 }
+
+export type Testimonial = TestimonialBase & TestimonialCopy;
 
 export interface FaqEntry {
   readonly question: string;
   readonly answer: string;
 }
 
+export type ContactChannelId = 'whatsapp' | 'viber' | 'instagram';
+
 export interface ContactChannel {
-  readonly label: string;
+  readonly id: ContactChannelId;
   readonly href: string;
   readonly primary: boolean;
 }

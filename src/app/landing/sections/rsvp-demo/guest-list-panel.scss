@@ -70,7 +70,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 40px;
-  line-height: 1;
+  line-height: calc(1 * var(--leading-scale));
 }
 
 .stat__label {

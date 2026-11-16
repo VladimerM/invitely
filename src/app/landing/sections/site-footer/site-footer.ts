@@ -1,7 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { STUDIO_CONTACT } from '../../data/content';
+import { I18n } from '../../../core/i18n/i18n';
+import { STUDIO_EMAIL } from '../../data/content';
 
 @Component({
   selector: 'app-site-footer',
@@ -15,7 +16,7 @@ import { STUDIO_CONTACT } from '../../data/content';
         height="230"
         alt="Invitely"
       />
-      <span>{{ contact.location }} · {{ contact.email }}</span>
+      <span>{{ t().footer.location }} · {{ email }}</span>
       <span>© {{ year }} Invitely</span>
     </div>
   `,
@@ -45,6 +46,7 @@ import { STUDIO_CONTACT } from '../../data/content';
   `,
 })
 export class SiteFooter {
-  protected readonly contact = STUDIO_CONTACT;
+  protected readonly t = inject(I18n).t;
+  protected readonly email = STUDIO_EMAIL;
   protected readonly year = new Date().getFullYear();
 }

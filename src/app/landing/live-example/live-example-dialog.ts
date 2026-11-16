@@ -10,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { I18n } from '../../core/i18n/i18n';
 import { PhoneFrame } from '../../shared/ui/phone-frame/phone-frame';
 import { InvitationTheme } from '../models/invitation-theme';
 import { Occasion } from '../models/occasion';
@@ -31,6 +32,8 @@ import { LiveInvitation } from './live-invitation';
   },
 })
 export class LiveExampleDialog {
+  protected readonly t = inject(I18n).t;
+
   readonly theme = input.required<InvitationTheme>();
   readonly occasion = input.required<Occasion>();
 

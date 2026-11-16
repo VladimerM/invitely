@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 
+import { I18n } from '../../../core/i18n/i18n';
 import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 import { TESTIMONIALS } from '../../data/content';
 
@@ -8,22 +9,25 @@ import { TESTIMONIALS } from '../../data/content';
   selector: 'app-testimonials-section',
   imports: [Eyebrow, NgOptimizedImage],
   template: `
+    @let text = t().testimonials;
     <div class="container content">
       <div class="section-intro__heading heading">
-        <app-eyebrow tone="taupe">Kind words</app-eyebrow>
-        <h2 class="display title">From our hosts.</h2>
+        <app-eyebrow tone="taupe">{{ text.eyebrow }}</app-eyebrow>
+        <h2 class="display title">{{ text.title }}</h2>
       </div>
       <div class="quotes">
-        @for (testimonial of testimonials; track testimonial.author) {
+        @for (testimonial of testimonials(); track testimonial.id) {
           <figure class="quote">
             <div class="photo">
-              <img [ngSrc]="testimonial.photo.url" [alt]="testimonial.photo.alt" fill />
-              <span class="photo__credit">Photo: {{ testimonial.photo.credit }} / Unsplash</span>
+              <img [ngSrc]="testimonial.photo.url" [alt]="testimonial.photoAlt" fill />
+              <span class="photo__credit">{{
+                text.photoCredit(testimonial.photo.credit)
+              }}</span>
             </div>
-            <blockquote class="quote__text">“{{ testimonial.quote }}”</blockquote>
+            <blockquote class="quote__text">{{ text.quoted(testimonial.quote) }}</blockquote>
             <figcaption class="quote__caption">
               <span>{{ testimonial.author }}</span>
-              <a href="#styles" class="quote__link">See their invitation →</a>
+              <a href="#styles" class="quote__link">{{ text.seeInvitation }}</a>
             </figcaption>
           </figure>
         }
@@ -91,7 +95,7 @@ import { TESTIMONIALS } from '../../data/content';
       font-family: var(--font-display);
       font-style: italic;
       font-size: 24px;
-      line-height: 1.3;
+      line-height: calc(1.3 * var(--leading-scale));
       text-wrap: pretty;
     }
 
@@ -113,5 +117,9 @@ import { TESTIMONIALS } from '../../data/content';
   `,
 })
 export class TestimonialsSection {
-  protected readonly testimonials = TESTIMONIALS;
+  protected readonly t = inject(I18n).t;
+  protected readonly testimonials = computed(() => {
+    const items = this.t().testimonials.items;
+    return TESTIMONIALS.map((base) => ({ ...base, ...items[base.id] }));
+  });
 }

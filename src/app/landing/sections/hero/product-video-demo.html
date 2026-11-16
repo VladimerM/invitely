@@ -1,0 +1,15 @@
+<div class="halo" aria-hidden="true"></div>
+
+<app-phone-frame>
+  <video
+    #video
+    class="screen-video"
+    [src]="src"
+    loop
+    muted
+    playsinline
+    preload="metadata"
+    disablepictureinpicture
+    [attr.aria-label]="t().hero.videoLabel"
+  ></video>
+</app-phone-frame>

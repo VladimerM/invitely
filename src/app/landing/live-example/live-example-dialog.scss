@@ -61,13 +61,13 @@
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(40px, 5vw, 60px);
-  line-height: 1;
+  line-height: calc(1 * var(--leading-scale));
 }
 
 .details__description {
   margin: 0;
   font-size: 16px;
-  line-height: 1.65;
+  line-height: calc(1.65 * var(--leading-scale));
   font-weight: 300;
   color: var(--color-sand);
   text-wrap: pretty;
