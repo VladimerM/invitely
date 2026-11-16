@@ -1,3 +1,5 @@
+import { ThemeId } from './invitation-theme';
+
 export interface ProcessStep {
   readonly numeral: string;
   readonly title: string;
@@ -30,17 +32,13 @@ export type TestimonialId = 'nino-giorgi' | 'tamar-levan' | 'keti';
 
 export interface TestimonialBase {
   readonly id: TestimonialId;
-  readonly photo: {
-    readonly url: string;
-    /** Photographer attribution, shown on the image. */
-    readonly credit: string;
-  };
+  /** The portfolio style the host ordered; the quote links to its live preview. */
+  readonly themeId: ThemeId;
 }
 
 export interface TestimonialCopy {
   readonly quote: string;
   readonly author: string;
-  readonly photoAlt: string;
 }
 
 export type Testimonial = TestimonialBase & TestimonialCopy;

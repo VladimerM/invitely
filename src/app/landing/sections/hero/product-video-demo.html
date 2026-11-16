@@ -1,4 +1,11 @@
-<div class="halo" aria-hidden="true"></div>
+@let sample = card().sample;
+<!-- The printed card this phone version replaces, set behind it on the "table". -->
+<div class="paper" aria-hidden="true">
+  <span class="paper__intro">{{ sample.intro }}</span>
+  <span class="paper__names">{{ sample.first }}<br /><span class="paper__joiner">{{ sample.joiner }}</span><br />{{ sample.second }}</span>
+  <span class="paper__date">{{ sample.shortDate }}</span>
+  <span class="paper__venue">{{ sample.venue }}</span>
+</div>
 
 <app-phone-frame>
   <video

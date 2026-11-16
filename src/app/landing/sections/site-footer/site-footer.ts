@@ -16,14 +16,15 @@ import { STUDIO_EMAIL } from '../../data/content';
         height="230"
         alt="Invitely"
       />
-      <span>{{ t().footer.location }} · {{ email }}</span>
+      <span>{{ t().footer.location }}</span>
+      <a [href]="'mailto:' + email">{{ email }}</a>
       <span>© {{ year }} Invitely</span>
     </div>
   `,
   styles: `
     :host {
       display: block;
-      background: var(--color-ink);
+      background: var(--color-vine);
       color: var(--color-sand);
     }
 

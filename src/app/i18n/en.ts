@@ -12,12 +12,6 @@ import { InvitationThemeCopy, ThemeId } from '../landing/models/invitation-theme
 import { Occasion, OccasionFilter } from '../landing/models/occasion';
 import { RsvpSampleCopy } from '../landing/models/rsvp';
 
-/** A headline whose second part renders as italic gold emphasis. */
-export interface Headline {
-  readonly lead: string;
-  readonly em: string;
-}
-
 const OCCASION_NOUN: Readonly<Record<Occasion, string>> = {
   Wedding: 'wedding',
   Birthday: 'birthday',
@@ -61,24 +55,23 @@ export const EN = {
   },
 
   hero: {
-    kicker: 'Digital invitation studio · Tbilisi',
-    headline: { lead: 'Elegant digital invitations,', em: 'designed for you.' } as Headline,
-    intro: 'Choose a style, share your details, and we create a personalized invitation with RSVP.',
-    orderCta: 'Order your invitation',
-    examplesCta: 'See examples',
-    highlights: ['Ready in 2–5 days', 'Georgian & English', 'RSVP included'],
+    headline: 'Invitations your guests open on their phone and answer in one tap.',
+    intro:
+      'Pick a style, send us your names, date and venue, and our Tbilisi studio designs a personal invitation page with RSVP.',
+    orderCta: 'Order an invitation',
+    examplesCta: 'Browse styles',
+    highlights: ['From 290 ₾', 'Ready in 2–5 days', 'In Georgian and English'],
     videoLabel:
       'Screen recording of an Invitely wedding invitation being opened and browsed on a phone',
   },
 
   showcase: {
-    eyebrow: 'The portfolio',
-    title: { lead: 'Styles we’ll make', em: 'entirely yours.' } as Headline,
-    lede: 'Each piece is a starting point, not a template. We adapt colour, type, photography and wording to your day.',
+    title: 'Start from one of our styles',
+    lede: 'We change the colours, type, photos and wording to fit your day. Open any card to try the live invitation.',
     filterLabel: 'Filter styles by occasion',
     styleCount: (count: number) => `${count} ${count === 1 ? 'style' : 'styles'}`,
     openLive: (name: string) => `Open the ${name} live example`,
-    viewLive: 'View live example',
+    viewLive: 'Open preview',
   },
 
   themes: {
@@ -187,8 +180,7 @@ export const EN = {
   } satisfies Record<ThemeId, InvitationThemeCopy>,
 
   howItWorks: {
-    eyebrow: 'How it works',
-    title: { lead: 'You share the story.', em: 'We do the rest.' } as Headline,
+    title: 'How an order works',
     steps: [
       {
         numeral: 'I',
@@ -214,8 +206,7 @@ export const EN = {
   },
 
   included: {
-    eyebrow: 'What’s included',
-    title: 'Everything your guests need, in one link.',
+    title: 'Everything your guests need, in one link',
     features: [
       { title: 'Personalized design', description: 'Adapted to your palette, story and occasion.' },
       { title: 'Your photos and text', description: 'Every word and image is yours.' },
@@ -235,9 +226,8 @@ export const EN = {
   },
 
   rsvp: {
-    eyebrow: 'RSVP, built in',
-    title: { lead: 'No more counting replies', em: 'in group chats.' } as Headline,
-    lede: 'Guests answer in seconds. You see every response, guest count and note in one place. Try it — send a reply on the left.',
+    title: 'Replies land in one list, not twenty chats',
+    lede: 'Guests answer in a few seconds. You see who’s coming, how many, and any notes. Try it: send a reply from the phone.',
     guestSees: 'What your guest sees',
     youSee: 'What you see',
     samples: [
@@ -248,8 +238,8 @@ export const EN = {
       { name: 'Davit Gelashvili', note: '' },
     ] as readonly RsvpSampleCopy[],
     list: {
-      heading: 'Nino & Giorgi · Guest list',
-      meta: 'Private host page · updates live',
+      heading: 'Nino & Giorgi’s guest list',
+      meta: 'Only you can see this page. It updates as replies arrive.',
       export: 'Export to Excel',
       guestsAttending: 'Guests attending',
       replies: 'Replies',
@@ -279,9 +269,8 @@ export const EN = {
   },
 
   pricing: {
-    eyebrow: 'Packages',
-    title: { lead: 'Clear prices,', em: 'no surprises.' } as Headline,
-    mostChosen: 'Most chosen',
+    title: 'Three packages, fixed prices',
+    mostChosen: 'Most couples choose this one',
     currencyLabel: 'lari',
     choose: (name: string) => `Choose ${name}`,
     packages: {
@@ -325,33 +314,27 @@ export const EN = {
   },
 
   testimonials: {
-    eyebrow: 'Kind words',
-    title: 'From our hosts.',
-    photoCredit: (photographer: string) => `Photo: ${photographer} / Unsplash`,
+    title: 'What hosts told us',
     quoted: (text: string) => `“${text}”`,
-    seeInvitation: 'See their invitation →',
+    seeInvitation: (style: string) => `Their style: ${style}`,
     items: {
       'nino-giorgi': {
         quote: 'Our guests kept asking who made it. The RSVP list saved us weeks of phone calls.',
-        author: 'Nino & Giorgi · Wedding',
-        photoAlt: 'Groom beside the bride holding a bouquet',
+        author: 'Nino & Giorgi, wedding',
       },
       'tamar-levan': {
         quote: 'They understood exactly what we wanted from a few photos and a voice message.',
-        author: 'Tamar & Levan · Wedding',
-        photoAlt: 'Bride and groom walking together on a hillside',
+        author: 'Tamar & Levan, wedding in Kakheti',
       },
       keti: {
         quote: 'Elegant, fast, and the whole family could reply in Georgian.',
-        author: 'Keti · Christening',
-        photoAlt: 'A baby being baptised with water',
+        author: 'Keti, her daughter’s christening',
       },
     } satisfies Record<TestimonialId, TestimonialCopy>,
   },
 
   faq: {
-    eyebrow: 'Questions',
-    title: 'Good to know.',
+    title: 'Common questions',
     entries: [
       {
         question: 'How long does it take?',
@@ -382,7 +365,7 @@ export const EN = {
   },
 
   order: {
-    headline: { lead: 'Let’s create your', em: 'invitation.' } as Headline,
+    headline: 'Tell us about your day',
     pitch: 'Message us directly — we usually reply within the hour, in Georgian, English or Russian.',
     channels: {
       whatsapp: 'Message on WhatsApp',
@@ -410,7 +393,7 @@ export const EN = {
   },
 
   liveExample: {
-    kicker: (occasion: string) => `${occasion} · Live example`,
+    kicker: (occasion: Occasion) => `Live preview, ${OCCASION_NOUN[occasion]} invitation`,
     paletteLabel: 'Colour palette',
     hint: 'Tap the invitation to open it, then scroll.',
     order: 'Order this style',

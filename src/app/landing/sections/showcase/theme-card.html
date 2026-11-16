@@ -1,29 +1,28 @@
 @let sample = theme().sample;
 <button
   type="button"
-  class="cover"
+  class="card"
   (click)="view.emit()"
   [attr.aria-label]="t().showcase.openLive(theme().name)"
 >
-  <span class="cover__frame" aria-hidden="true"></span>
-  <span class="cover__content">
-    <span class="cover__intro">{{ sample.intro }}</span>
-    <span class="cover__names">
-      {{ sample.first }}<br /><span class="joiner">{{ sample.joiner }}</span
-      ><br />{{ sample.second }}
+  <span class="cover">
+    <span class="cover__frame" aria-hidden="true"></span>
+    <span class="cover__content">
+      <span class="cover__intro">{{ sample.intro }}</span>
+      <span class="cover__names">
+        {{ sample.first }}<br /><span class="joiner">{{ sample.joiner }}</span
+        ><br />{{ sample.second }}
+      </span>
+      <span class="cover__date">{{ sample.shortDate }}</span>
+      <span class="cover__venue">{{ sample.venue }}</span>
     </span>
-    <span class="cover__diamond" aria-hidden="true"></span>
-    <span class="cover__date">{{ sample.shortDate }}</span>
-    <span class="cover__venue">{{ sample.venue }}</span>
+  </span>
+
+  <span class="caption">
+    <span class="caption__name">{{ theme().name }}</span>
+    <span class="caption__meta">
+      <span>{{ t().occasions[occasion()] }}</span>
+      <span class="caption__open" aria-hidden="true">{{ t().showcase.viewLive }}</span>
+    </span>
   </span>
 </button>
-
-<div class="caption">
-  <div class="caption__text">
-    <h3 class="caption__name">{{ theme().name }}</h3>
-    <span class="caption__occasion">{{ t().occasions[occasion()] }}</span>
-  </div>
-  <button type="button" class="btn btn--outline-light view" (click)="view.emit()">
-    {{ t().showcase.viewLive }}
-  </button>
-</div>

@@ -8,10 +8,6 @@
   gap: 56px;
 }
 
-.title {
-  font-size: clamp(40px, 5vw, 60px);
-}
-
 .entries {
   display: flex;
   flex-direction: column;
@@ -52,7 +48,7 @@
   font-size: 22px;
   font-weight: 300;
   text-align: center;
-  color: var(--color-gold);
+  color: var(--color-taupe);
 }
 
 .entry__answer {

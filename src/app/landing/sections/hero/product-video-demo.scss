@@ -3,22 +3,70 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 680px;
+  min-height: 640px;
 }
 
-// Arched backdrop behind the phone.
-.halo {
+// Ivory Vow printed card, tilted on the table behind the phone.
+.paper {
   position: absolute;
-  bottom: 20px;
-  width: min(420px, 92%);
-  height: 600px;
-  border-radius: 210px 210px 6px 6px;
-  background: var(--color-sand);
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 270px;
+  aspect-ratio: 5 / 7;
+  padding: 44px 28px;
+  border: 1px solid rgba(184, 149, 90, 0.45);
+  outline: 1px solid rgba(184, 149, 90, 0.45);
+  outline-offset: -12px;
+  background: #fbf8f2;
+  box-shadow:
+    0 1px 1px rgba(31, 29, 26, 0.06),
+    0 18px 36px -18px rgba(31, 29, 26, 0.35);
+  color: #2a2620;
+  text-align: center;
+  transform: translate(-96%, -44%) rotate(-6deg);
+}
+
+.paper__intro {
+  margin-top: 28px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.paper__names {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 40px;
+  line-height: calc(1.05 * var(--leading-scale));
+}
+
+.paper__joiner {
+  font-size: 26px;
+  color: var(--color-gold);
+}
+
+.paper__date {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.paper__venue {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--color-taupe);
 }
 
 app-phone-frame {
+  position: relative;
   --screen-bg: var(--color-sand);
-  --phone-shadow: 0 40px 80px -30px rgba(31, 29, 26, 0.45), 0 0 0 1px rgba(184, 149, 90, 0.35);
+  --phone-shadow: 0 40px 70px -32px rgba(31, 29, 26, 0.5);
+  transform: translateX(16%);
 }
 
 .screen-video {
@@ -28,4 +76,20 @@ app-phone-frame {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+// Single column: the card would crowd the copy, and a full-height phone pushes it off-screen.
+@media (max-width: 860px) {
+  :host {
+    min-height: 0;
+  }
+
+  .paper {
+    display: none;
+  }
+
+  app-phone-frame {
+    transform: none;
+    zoom: 0.78;
+  }
 }

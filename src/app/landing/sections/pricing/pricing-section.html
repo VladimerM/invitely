@@ -1,16 +1,15 @@
 @let text = t().pricing;
 <div class="container section">
-  <div class="heading">
-    <app-eyebrow centered>{{ text.eyebrow }}</app-eyebrow>
-    <h2 class="display">{{ text.title.lead }} <em>{{ text.title.em }}</em></h2>
-  </div>
+  <h2 class="display heading">{{ text.title }}</h2>
 
   <div class="packages">
     @for (pkg of packages(); track pkg.id) {
       <article class="package" [class.package--featured]="pkg.featured">
-        @if (pkg.featured) {
-          <span class="badge">{{ text.mostChosen }}</span>
-        }
+        <p class="package__note">
+          @if (pkg.featured) {
+            {{ text.mostChosen }}
+          }
+        </p>
         <header class="package__header">
           <h3 class="package__name">{{ pkg.name }}</h3>
           <p class="package__tagline">{{ pkg.tagline }}</p>
@@ -27,7 +26,7 @@
         <a
           href="#order"
           class="btn btn--block choose"
-          [class.btn--gold]="pkg.featured"
+          [class.btn--ink]="pkg.featured"
           [class.btn--outline]="!pkg.featured"
         >
           {{ text.choose(pkg.name) }}

@@ -1,30 +1,63 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  display: block;
 }
 
+// The whole tile is one button: printed card plus its caption.
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+// Each card lies slightly askew, as if set down by hand; it straightens when picked.
 .cover {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  padding: 0;
-  border: none;
+  aspect-ratio: 5 / 7;
   background: var(--theme-bg);
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
-  transition: transform 0.5s var(--ease-out-soft);
+  box-shadow:
+    0 1px 1px rgba(31, 29, 26, 0.08),
+    0 22px 40px -24px rgba(31, 29, 26, 0.45);
+  transform: rotate(var(--tilt, 0deg));
+  transition:
+    transform 0.45s var(--ease-out-soft),
+    box-shadow 0.45s var(--ease-out-soft);
+}
 
-  &:hover {
-    transform: translateY(-6px);
-  }
+:host(:nth-child(3n + 1)) {
+  --tilt: -1.2deg;
+}
+
+:host(:nth-child(3n + 2)) {
+  --tilt: 0.6deg;
+}
+
+:host(:nth-child(3n)) {
+  --tilt: -0.4deg;
+}
+
+.card:hover .cover,
+.card:focus-visible .cover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow:
+    0 1px 1px rgba(31, 29, 26, 0.08),
+    0 30px 50px -24px rgba(31, 29, 26, 0.5);
 }
 
 .cover__frame {
   position: absolute;
-  inset: 16px;
+  inset: 14px;
   border: 1px solid var(--theme-accent);
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 .cover__content {
@@ -40,9 +73,10 @@
   color: var(--theme-ink);
 }
 
+// Inside the card is the invitation's own typography, so print conventions apply.
 .cover__intro {
   font-size: 10px;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--theme-accent);
 }
@@ -59,60 +93,60 @@
   }
 }
 
-.cover__diamond {
-  width: 7px;
-  height: 7px;
-  background: var(--theme-accent);
-  transform: rotate(45deg);
-}
-
 .cover__date {
+  margin-top: 4px;
   font-size: 12px;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
 }
 
 .cover__venue {
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   opacity: 0.75;
 }
 
 .caption {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.caption__text {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .caption__name {
-  margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 26px;
-  line-height: calc(1.1 * var(--leading-scale));
+  font-weight: 500;
+  font-size: 24px;
+  line-height: calc(1.15 * var(--leading-scale));
 }
 
-.caption__occasion {
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-gold);
+.caption__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--color-taupe);
 }
 
-.view {
-  padding: 11px 18px;
-  border-color: rgba(237, 227, 211, 0.4);
-  font-size: 13px;
+.caption__open {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold);
+  text-underline-offset: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 
-  &:hover {
-    border-color: var(--color-gold);
-    background: var(--color-gold);
-    color: var(--color-ink);
+  .card:hover &,
+  .card:focus-visible & {
+    opacity: 1;
+  }
+
+  // Touch screens have no hover: keep the cue visible.
+  @media (hover: none) {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover {
+    transition: none;
   }
 }

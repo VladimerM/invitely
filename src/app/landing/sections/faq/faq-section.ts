@@ -1,12 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 
 import { I18n } from '../../../core/i18n/i18n';
-import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 
 /** Accordion where at most one answer is open at a time. */
 @Component({
   selector: 'app-faq-section',
-  imports: [Eyebrow],
   templateUrl: './faq-section.html',
   styleUrl: './faq-section.scss',
 })

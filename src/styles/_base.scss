@@ -16,6 +16,8 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  // Cormorant defaults to old-style figures, where 1 reads as I; prices, dates and counts need lining ones.
+  font-variant-numeric: lining-nums;
   -webkit-font-smoothing: antialiased;
 }
 

@@ -12,6 +12,11 @@
   --color-muted: #8c7f70;
   --color-gold: #b8955a;
   --color-gold-deep: #7a5f30;
+  // Deep vine green (from the Midnight Garden style): the one dark band, on the order section.
+  --color-vine: #22302a;
+  --color-vine-raised: #2c3c35;
+  // Linen table the portfolio cards are laid out on.
+  --color-linen: #e9e2d5;
   --color-device: #171513;
   --color-white: #ffffff;
   --color-error: #c9806b;
@@ -19,6 +24,8 @@
   --color-line: rgba(140, 127, 112, 0.25);
   --color-line-soft: rgba(140, 127, 112, 0.18);
   --color-line-light: rgba(237, 227, 211, 0.35);
+
+  --radius: 3px;
 
   // Typography
   --font-display: 'Cormorant Garamond', 'Georgian Display', Georgia, 'Times New Roman', serif;

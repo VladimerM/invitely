@@ -16,15 +16,15 @@ describe('App', () => {
   }
 
   it('renders the landing page headline in English', async () => {
-    expect(await headlineIn('en')).toContain('Elegant digital invitations');
+    expect(await headlineIn('en')).toContain('Invitations your guests open');
   });
 
   it('renders the landing page headline in Georgian', async () => {
-    expect(await headlineIn('ka')).toContain('ელეგანტური ციფრული მოსაწვევები');
+    expect(await headlineIn('ka')).toContain('მოსაწვევი, რომელსაც სტუმრები');
   });
 
   it('renders the landing page headline in Russian', async () => {
-    expect(await headlineIn('ru')).toContain('Элегантные онлайн-приглашения');
+    expect(await headlineIn('ru')).toContain('Приглашения, которые гости');
   });
 
   it('re-renders in place when the language changes', async () => {
@@ -37,7 +37,7 @@ describe('App', () => {
     await fixture.whenStable();
 
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.querySelector('h1')?.textContent).toContain('Элегантные');
+    expect(element.querySelector('h1')?.textContent).toContain('Приглашения, которые');
     expect(document.documentElement.lang).toBe('ru');
   });
 });

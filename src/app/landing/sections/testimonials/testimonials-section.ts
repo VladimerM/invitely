@@ -1,33 +1,30 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 
 import { I18n } from '../../../core/i18n/i18n';
-import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 import { TESTIMONIALS } from '../../data/content';
+import { INVITATION_THEMES } from '../../data/themes';
+import { ShowcaseStore } from '../../state/showcase-store';
 
+/** Host quotes; each links to a live preview of the style that host ordered. */
 @Component({
   selector: 'app-testimonials-section',
-  imports: [Eyebrow, NgOptimizedImage],
   template: `
     @let text = t().testimonials;
-    <div class="container content">
-      <div class="section-intro__heading heading">
-        <app-eyebrow tone="taupe">{{ text.eyebrow }}</app-eyebrow>
-        <h2 class="display title">{{ text.title }}</h2>
-      </div>
+    <div class="container section">
+      <h2 class="display heading">{{ text.title }}</h2>
       <div class="quotes">
         @for (testimonial of testimonials(); track testimonial.id) {
           <figure class="quote">
-            <div class="photo">
-              <img [ngSrc]="testimonial.photo.url" [alt]="testimonial.photoAlt" fill />
-              <span class="photo__credit">{{
-                text.photoCredit(testimonial.photo.credit)
-              }}</span>
-            </div>
             <blockquote class="quote__text">{{ text.quoted(testimonial.quote) }}</blockquote>
             <figcaption class="quote__caption">
-              <span>{{ testimonial.author }}</span>
-              <a href="#styles" class="quote__link">{{ text.seeInvitation }}</a>
+              <span class="quote__author">{{ testimonial.author }}</span>
+              <button
+                type="button"
+                class="text-link quote__style"
+                (click)="showcase.openLive(testimonial.themeId)"
+              >
+                {{ text.seeInvitation(testimonial.styleName) }}
+              </button>
             </figcaption>
           </figure>
         }
@@ -40,86 +37,58 @@ import { TESTIMONIALS } from '../../data/content';
       background: var(--color-sand);
     }
 
-    .content {
-      padding-block: clamp(72px, 9vw, 120px);
-    }
-
     .heading {
-      margin-bottom: 56px;
-      max-width: none;
-    }
-
-    .title {
-      font-size: clamp(40px, 5vw, 60px);
+      margin-bottom: 48px;
     }
 
     .quotes {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 48px clamp(28px, 4vw, 56px);
     }
 
     .quote {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      justify-content: space-between;
+      gap: 28px;
       margin: 0;
-    }
-
-    .photo {
-      position: relative;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      border-radius: 4px;
-      background: rgba(140, 127, 112, 0.15);
-
-      img {
-        object-fit: cover;
-      }
-    }
-
-    .photo__credit {
-      position: absolute;
-      left: 10px;
-      bottom: 10px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(31, 29, 26, 0.55);
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      color: var(--color-paper);
+      padding-top: 24px;
+      border-top: 1px solid rgba(31, 29, 26, 0.25);
     }
 
     .quote__text {
       margin: 0;
       font-family: var(--font-display);
-      font-style: italic;
-      font-size: 24px;
+      font-weight: 500;
+      font-size: 25px;
       line-height: calc(1.3 * var(--leading-scale));
       text-wrap: pretty;
     }
 
     .quote__caption {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      font-size: 13px;
-      letter-spacing: 0.04em;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 14px;
     }
 
-    .quote__link {
-      padding-bottom: 2px;
-      border-bottom: 1px solid var(--color-gold);
-      letter-spacing: 0;
+    .quote__author {
+      color: var(--color-taupe);
     }
   `,
 })
 export class TestimonialsSection {
   protected readonly t = inject(I18n).t;
+  protected readonly showcase = inject(ShowcaseStore);
+
   protected readonly testimonials = computed(() => {
     const items = this.t().testimonials.items;
-    return TESTIMONIALS.map((base) => ({ ...base, ...items[base.id] }));
+    return TESTIMONIALS.map((base) => ({
+      ...base,
+      ...items[base.id],
+      styleName: INVITATION_THEMES.find((theme) => theme.id === base.themeId)?.name ?? '',
+    }));
   });
 }

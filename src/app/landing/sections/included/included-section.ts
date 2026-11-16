@@ -1,16 +1,13 @@
 import { Component, inject } from '@angular/core';
 
 import { I18n } from '../../../core/i18n/i18n';
-import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 
 @Component({
   selector: 'app-included-section',
-  imports: [Eyebrow],
   template: `
     @let text = t().included;
     <div class="container layout">
       <div class="section-intro__heading">
-        <app-eyebrow tone="taupe">{{ text.eyebrow }}</app-eyebrow>
         <h2 class="display title">{{ text.title }}</h2>
       </div>
       <ul class="features">
@@ -37,10 +34,6 @@ import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
       gap: 56px;
       padding-block: clamp(72px, 9vw, 120px);
-    }
-
-    .title {
-      font-size: clamp(40px, 4.6vw, 60px);
     }
 
     .features {

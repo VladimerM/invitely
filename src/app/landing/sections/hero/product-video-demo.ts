@@ -1,9 +1,10 @@
-import { Component, ElementRef, afterNextRender, inject, input, viewChild } from '@angular/core';
+import { Component, ElementRef, afterNextRender, computed, inject, input, viewChild } from '@angular/core';
 
 import { I18n } from '../../../core/i18n/i18n';
 import { PhoneFrame } from '../../../shared/ui/phone-frame/phone-frame';
+import { ShowcaseStore } from '../../state/showcase-store';
 
-/** Phone mock-up that loops a screen recording of a finished invitation. */
+/** Printed card plus a phone mock-up that loops a screen recording of a finished invitation. */
 @Component({
   selector: 'app-product-video-demo',
   imports: [PhoneFrame],
@@ -15,6 +16,9 @@ export class ProductVideoDemo {
   readonly animate = input(true);
 
   protected readonly t = inject(I18n).t;
+  private readonly showcase = inject(ShowcaseStore);
+  /** The Ivory Vow style, shown as the printed card behind the phone. */
+  protected readonly card = computed(() => this.showcase.themes()[0]);
   protected readonly src = 'assets/videos/invitely-demo.mp4';
 
   private readonly video = viewChild.required<ElementRef<HTMLVideoElement>>('video');

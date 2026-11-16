@@ -1,65 +1,74 @@
+// The portfolio is laid out like stationery on a linen table.
 :host {
   display: block;
+  background: var(--color-linen);
 }
 
-.section-intro {
-  margin-bottom: 48px;
-}
-
-.showcase-title {
-  font-size: clamp(40px, 5vw, 68px);
-}
-
-.occasions {
+.intro {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin-bottom: 56px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26em);
+  align-items: end;
+  gap: 24px 64px;
+  margin-bottom: 40px;
 }
 
-.occasion {
-  --sub-color: #b8ac9c;
+.title {
+  max-width: 14em;
+}
 
+.lede {
+  max-width: none;
+}
+
+.filters {
   display: flex;
-  flex-direction: column;
+  gap: 4px 28px;
+  margin-bottom: 48px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(31, 29, 26, 0.14);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: baseline;
   gap: 6px;
-  padding: 18px 20px;
-  border: 1px solid rgba(237, 227, 211, 0.22);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--color-paper);
-  text-align: left;
-  transition: all 0.25s ease;
+  flex: none;
+  margin-bottom: -3px;
+  padding: 10px 0 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--color-taupe);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
 
   &:hover {
-    border-color: var(--color-gold);
+    color: var(--color-ink);
   }
 
   &.is-selected {
-    --sub-color: var(--color-ink);
-
-    border-color: var(--color-gold);
-    background: var(--color-gold);
+    border-bottom-color: var(--color-ink);
     color: var(--color-ink);
   }
 }
 
-.occasion__label {
-  font-family: var(--font-display);
-  font-size: 22px;
-  line-height: calc(1.1 * var(--leading-scale));
-}
-
-.occasion__count {
-  margin-top: 6px;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--sub-color);
+.filter__count {
+  font-size: 12px;
+  color: var(--color-muted);
 }
 
 .themes {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 56px 32px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 64px clamp(28px, 4vw, 56px);
+}
+
+@media (max-width: 760px) {
+  .intro {
+    grid-template-columns: 1fr;
+  }
 }

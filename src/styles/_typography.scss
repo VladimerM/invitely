@@ -1,17 +1,13 @@
-// Section headline. Emphasised words render in italic gold.
+// Section headline: one size and weight for every section, so hierarchy stays consistent.
 .display {
+  max-width: 16em;
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(40px, 5vw, 64px);
-  line-height: calc(1 * var(--leading-scale));
+  font-weight: 500;
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: calc(1.08 * var(--leading-scale));
   letter-spacing: -0.01em;
   text-wrap: balance;
-
-  em {
-    color: var(--color-gold);
-    font-weight: 400;
-  }
 }
 
 .lede {

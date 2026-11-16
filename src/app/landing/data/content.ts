@@ -8,24 +8,11 @@ export const PRICING_PACKAGES: readonly PricingPackageBase[] = [
   { id: 'exclusive', price: 890, featured: false },
 ];
 
-/** Builds a cropped, auto-format Unsplash image URL (Unsplash License: free for commercial use). */
-const unsplash = (photoId: string): string =>
-  `https://images.unsplash.com/photo-${photoId}?w=800&q=80&auto=format&fit=crop`;
-
-// Stock photography stands in for client photos until real ones (with consent) are available.
+// Placeholder quotes until real client feedback (with consent) is available.
 export const TESTIMONIALS: readonly TestimonialBase[] = [
-  {
-    id: 'nino-giorgi',
-    photo: { url: unsplash('1519741497674-611481863552'), credit: 'Nathan Dumlao' },
-  },
-  {
-    id: 'tamar-levan',
-    photo: { url: unsplash('1532712938310-34cb3982ef74'), credit: 'Foto Pettine' },
-  },
-  {
-    id: 'keti',
-    photo: { url: unsplash('1746300336572-75535acb7a85'), credit: 'German Krupenin' },
-  },
+  { id: 'nino-giorgi', themeId: 'ivory' },
+  { id: 'tamar-levan', themeId: 'olive' },
+  { id: 'keti', themeId: 'cloud' },
 ];
 
 export const CONTACT_CHANNELS: readonly ContactChannel[] = [

@@ -1,7 +1,6 @@
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 
 import { I18n } from '../../../core/i18n/i18n';
-import { Eyebrow } from '../../../shared/ui/eyebrow/eyebrow';
 import { PhoneFrame } from '../../../shared/ui/phone-frame/phone-frame';
 import { SAMPLE_RSVP_RESPONSES } from '../../data/rsvp-responses';
 import { RsvpReply, RsvpResponse } from '../../models/rsvp';
@@ -13,7 +12,7 @@ const HIGHLIGHT_MS = 2500;
 /** Side-by-side demo: a guest replies on the left, the host's list updates on the right. */
 @Component({
   selector: 'app-rsvp-demo-section',
-  imports: [Eyebrow, PhoneFrame, GuestReplyCard, GuestListPanel],
+  imports: [PhoneFrame, GuestReplyCard, GuestListPanel],
   templateUrl: './rsvp-demo-section.html',
   styleUrl: './rsvp-demo-section.scss',
 })

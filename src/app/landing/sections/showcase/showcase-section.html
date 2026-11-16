@@ -1,24 +1,23 @@
 @let text = t().showcase;
 <div class="container section">
-  <div class="section-intro">
-    <div class="section-intro__heading">
-      <app-eyebrow tone="gold">{{ text.eyebrow }}</app-eyebrow>
-      <h2 class="display showcase-title">{{ text.title.lead }} <em>{{ text.title.em }}</em></h2>
-    </div>
+  <div class="intro">
+    <h2 class="display title">{{ text.title }}</h2>
     <p class="lede">{{ text.lede }}</p>
   </div>
 
-  <div class="occasions" role="group" [attr.aria-label]="text.filterLabel">
+  <div class="filters" role="group" [attr.aria-label]="text.filterLabel">
     @for (filter of occasionFilters; track filter) {
       <button
         type="button"
-        class="occasion"
+        class="filter"
         [class.is-selected]="store.occasion() === filter"
         [attr.aria-pressed]="store.occasion() === filter"
+        [attr.aria-label]="t().occasions[filter] + ', ' + text.styleCount(store.styleCount(filter))"
         (click)="store.selectOccasion(filter)"
       >
-        <span class="occasion__label">{{ t().occasions[filter] }}</span>
-        <span class="occasion__count">{{ text.styleCount(store.styleCount(filter)) }}</span>
+        {{ t().occasions[filter] }}<span class="filter__count" aria-hidden="true">{{
+          store.styleCount(filter)
+        }}</span>
       </button>
     }
   </div>

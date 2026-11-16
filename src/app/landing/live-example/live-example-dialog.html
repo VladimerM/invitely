@@ -9,7 +9,7 @@
     tabindex="-1"
   >
     <div class="details">
-      <span class="details__kicker">{{ text.kicker(t().occasions[occasion()]) }}</span>
+      <span class="details__kicker">{{ text.kicker(occasion()) }}</span>
       <h2 class="details__name" id="live-example-title">{{ theme().name }}</h2>
       <p class="details__description">{{ theme().description }}</p>
       <div class="swatches" role="img" [attr.aria-label]="text.paletteLabel">
