@@ -1,0 +1,11 @@
+<div class="container bar">
+  <a href="#top" class="brand" aria-label="Invitely, back to top">
+    <img ngSrc="assets/wordmark.png" alt="Invitely" width="725" height="230" priority />
+  </a>
+  <nav class="nav" aria-label="Main">
+    @for (link of links; track link.href) {
+      <a class="nav__link" [href]="link.href">{{ link.label }}</a>
+    }
+    <a href="#order" class="btn btn--ink order">Order</a>
+  </nav>
+</div>

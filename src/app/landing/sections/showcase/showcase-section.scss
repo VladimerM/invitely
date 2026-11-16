@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.section-intro {
+  margin-bottom: 48px;
+}
+
+.showcase-title {
+  font-size: clamp(40px, 5vw, 68px);
+}
+
+.occasions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.occasion {
+  --sub-color: #b8ac9c;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px;
+  border: 1px solid rgba(237, 227, 211, 0.22);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-paper);
+  text-align: left;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: var(--color-gold);
+  }
+
+  &.is-selected {
+    --sub-color: var(--color-ink);
+
+    border-color: var(--color-gold);
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+}
+
+.occasion__label {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.occasion__ka {
+  font-family: var(--font-georgian);
+  font-size: 12px;
+  color: var(--sub-color);
+}
+
+.occasion__count {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sub-color);
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 56px 32px;
+}

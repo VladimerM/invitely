@@ -1,0 +1,51 @@
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: block;
+  background: rgba(250, 247, 242, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  img {
+    display: block;
+    width: auto;
+    height: 30px;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(16px, 3vw, 36px);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.order {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+// On phones the section links would wrap the sticky bar onto two rows; keep only the CTA.
+@media (max-width: 640px) {
+  .nav__link {
+    display: none;
+  }
+}

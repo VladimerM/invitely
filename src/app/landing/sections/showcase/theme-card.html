@@ -1,0 +1,29 @@
+@let sample = theme().sample;
+<button
+  type="button"
+  class="cover"
+  (click)="view.emit()"
+  [attr.aria-label]="'Open the ' + theme().name + ' live example'"
+>
+  <span class="cover__frame" aria-hidden="true"></span>
+  <span class="cover__content">
+    <span class="cover__intro">{{ sample.intro }}</span>
+    <span class="cover__names">
+      {{ sample.first }}<br /><span class="joiner">{{ sample.joiner }}</span
+      ><br />{{ sample.second }}
+    </span>
+    <span class="cover__diamond" aria-hidden="true"></span>
+    <span class="cover__date">{{ sample.shortDate }}</span>
+    <span class="cover__venue">{{ sample.venue }}</span>
+  </span>
+</button>
+
+<div class="caption">
+  <div class="caption__text">
+    <h3 class="caption__name">{{ theme().name }}</h3>
+    <span class="caption__occasion">{{ occasion() }}</span>
+  </div>
+  <button type="button" class="btn btn--outline-light view" (click)="view.emit()">
+    View live example
+  </button>
+</div>

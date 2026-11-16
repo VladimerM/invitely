@@ -1,0 +1,38 @@
+// Design tokens for the Invitely brand. Components consume these as CSS custom
+// properties so palette or type changes happen in one place.
+:root {
+  // Palette
+  --color-paper: #faf7f2;
+  --color-cream: #f6f1e8;
+  --color-sand: #ede3d3;
+  --color-ink: #1f1d1a;
+  --color-ink-raised: #2a2724;
+  --color-body: #4a443d;
+  --color-taupe: #6e6357;
+  --color-muted: #8c7f70;
+  --color-gold: #b8955a;
+  --color-gold-deep: #7a5f30;
+  --color-device: #171513;
+  --color-white: #ffffff;
+  --color-error: #c9806b;
+
+  --color-line: rgba(140, 127, 112, 0.25);
+  --color-line-soft: rgba(140, 127, 112, 0.18);
+  --color-line-light: rgba(237, 227, 211, 0.35);
+
+  // Typography
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Jost', 'Noto Serif Georgian', system-ui, sans-serif;
+  --font-georgian: 'Noto Serif Georgian', serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+
+  // Layout
+  --container-width: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --section-space: clamp(72px, 9vw, 128px);
+  --header-height: 60px;
+
+  // Motion
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out-strong: cubic-bezier(0.7, 0, 0.2, 1);
+}

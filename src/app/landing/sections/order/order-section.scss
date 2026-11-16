@@ -1,0 +1,166 @@
+:host {
+  display: block;
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  align-items: start;
+  gap: 64px;
+  padding-top: clamp(80px, 10vw, 140px);
+  padding-bottom: 64px;
+}
+
+// ── Pitch & messaging ───────────────────────────────────────────────────
+.pitch {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.mark {
+  width: 64px;
+  height: auto;
+}
+
+.headline {
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 0.98;
+}
+
+.pitch__text {
+  max-width: 440px;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--color-sand);
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.channel {
+  padding: 16px 24px;
+}
+
+.channel--primary {
+  padding: 17px 28px;
+  letter-spacing: 0.03em;
+}
+
+// ── Order form ──────────────────────────────────────────────────────────
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 4vw, 44px);
+  border: 1px solid rgba(184, 149, 90, 0.3);
+  border-radius: 6px;
+  background: var(--color-ink-raised);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-sand);
+}
+
+.field__control {
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-line-light);
+  background: transparent;
+  font-size: 16px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-paper);
+
+  &.is-invalid {
+    border-bottom-color: var(--color-error);
+  }
+
+  option {
+    color: var(--color-ink);
+  }
+}
+
+.field__control--date {
+  color-scheme: dark;
+}
+
+.field__error {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--color-error);
+}
+
+.form__style {
+  font-size: 13px;
+  color: var(--color-gold);
+}
+
+.submit {
+  margin-top: 6px;
+  padding: 17px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+
+  &:hover {
+    background: var(--color-gold);
+  }
+}
+
+.sent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 40px 0;
+}
+
+.sent__diamond {
+  width: 10px;
+  height: 10px;
+}
+
+.sent__title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.sent__text {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: var(--color-sand);
+}

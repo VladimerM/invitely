@@ -1,0 +1,93 @@
+<header class="intro">
+  <span class="intro__deadline">Kindly reply by 1 May</span>
+  <span class="intro__question">Will you join us?</span>
+</header>
+
+@if (confirmation(); as confirmation) {
+  <div class="thanks" role="status">
+    <span class="diamond thanks__diamond" aria-hidden="true"></span>
+    <span class="thanks__title">
+      @if (confirmation.firstName) {
+        Thank you,<br />{{ confirmation.firstName }}
+      } @else {
+        Thank you!
+      }
+    </span>
+    <span class="thanks__text">Your reply has reached Nino &amp; Giorgi.</span>
+    <button type="button" class="thanks__again" (click)="startOver()">Send another reply</button>
+  </div>
+} @else {
+  @let attending = reply().attending;
+  <form class="reply" [formRoot]="replyForm">
+    <div class="choice" role="group" aria-label="Your answer">
+      <button
+        type="button"
+        class="choice__option"
+        [class.is-selected]="attending"
+        [attr.aria-pressed]="attending"
+        (click)="setAttending(true)"
+      >
+        Joyfully accept
+      </button>
+      <button
+        type="button"
+        class="choice__option"
+        [class.is-selected]="!attending"
+        [attr.aria-pressed]="!attending"
+        (click)="setAttending(false)"
+      >
+        Regretfully decline
+      </button>
+    </div>
+
+    <label class="field">
+      Your name
+      <input
+        class="field__input"
+        type="text"
+        autocomplete="name"
+        placeholder="e.g. Tamar Kvaratskhelia"
+        [formField]="replyForm.name"
+      />
+    </label>
+
+    @if (attending) {
+      <div class="guests">
+        <span class="field" id="guest-count-label">Number of guests</span>
+        <div class="stepper" role="group" aria-labelledby="guest-count-label">
+          <button
+            type="button"
+            class="stepper__button"
+            aria-label="One fewer guest"
+            [disabled]="reply().guests <= minGuests"
+            (click)="changeGuests(-1)"
+          >
+            −
+          </button>
+          <span class="stepper__value" aria-live="polite">{{ reply().guests }}</span>
+          <button
+            type="button"
+            class="stepper__button"
+            aria-label="One more guest"
+            [disabled]="reply().guests >= maxGuests"
+            (click)="changeGuests(1)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    }
+
+    <label class="field">
+      A note for the couple
+      <textarea
+        class="field__note"
+        rows="3"
+        placeholder="Dietary needs, song requests, wishes…"
+        [formField]="replyForm.note"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="btn btn--ink btn--block send">Send reply</button>
+  </form>
+}

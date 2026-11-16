@@ -1,0 +1,39 @@
+<div class="container section">
+  <div class="section-intro">
+    <div class="section-intro__heading">
+      <app-eyebrow tone="gold">The portfolio</app-eyebrow>
+      <h2 class="display showcase-title">Styles we’ll make <em>entirely yours.</em></h2>
+    </div>
+    <p class="lede">
+      Each piece is a starting point, not a template. We adapt colour, type, photography and wording
+      to your day.
+    </p>
+  </div>
+
+  <div class="occasions" role="group" aria-label="Filter styles by occasion">
+    @for (option of occasionOptions; track option.value) {
+      @let count = store.styleCount(option.value);
+      <button
+        type="button"
+        class="occasion"
+        [class.is-selected]="store.occasion() === option.value"
+        [attr.aria-pressed]="store.occasion() === option.value"
+        (click)="store.selectOccasion(option.value)"
+      >
+        <span class="occasion__label">{{ option.value }}</span>
+        <span class="occasion__ka" lang="ka">{{ option.labelKa }}</span>
+        <span class="occasion__count">{{ count }} {{ count === 1 ? 'style' : 'styles' }}</span>
+      </button>
+    }
+  </div>
+
+  <div class="themes" aria-live="polite">
+    @for (theme of store.visibleThemes(); track theme.id) {
+      <app-theme-card
+        [theme]="theme"
+        [occasion]="store.occasionFor(theme)"
+        (view)="store.openLive(theme.id)"
+      />
+    }
+  </div>
+</div>

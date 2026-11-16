@@ -1,0 +1,85 @@
+@let sample = theme().sample;
+<button
+  type="button"
+  class="music"
+  [attr.aria-pressed]="musicOn()"
+  (click)="musicOn.set(!musicOn())"
+>
+  ♪ Music {{ musicOn() ? 'on' : 'off' }}
+</button>
+
+<div #scroller class="scroller" [attr.inert]="coverOpen() ? null : ''">
+  <section class="block block--title">
+    <span class="kicker">{{ sample.intro }}</span>
+    <span class="names">
+      {{ sample.first }}<br /><span class="joiner">{{ sample.joiner }}</span
+      ><br />{{ sample.second }}
+    </span>
+    <span class="ornament" aria-hidden="true"></span>
+    <span class="date">{{ sample.longDate }}</span>
+    <span class="venue">{{ sample.venue }}</span>
+  </section>
+
+  <div class="photo-placeholder photo">{{ sample.photoCaption }}</div>
+
+  <section class="block block--countdown">
+    <span class="kicker">Counting down</span>
+    <app-countdown-tiles [target]="sample.startsAt" />
+  </section>
+
+  <section class="block block--schedule">
+    <span class="kicker">The day</span>
+    @for (item of sample.schedule; track item.time) {
+      <div class="schedule-item">
+        <span class="schedule-item__time">{{ item.time }}</span>
+        <span class="schedule-item__label">{{ item.label }}</span>
+      </div>
+    }
+  </section>
+
+  <section class="block block--venue">
+    <div class="map">venue map</div>
+    <span class="venue-name">{{ sample.venue }}</span>
+    <span class="maps-link">Open in Maps</span>
+  </section>
+
+  <section class="block block--rsvp">
+    <span class="rsvp-question">Will you join us?</span>
+    <span class="rsvp-deadline">Kindly reply by {{ sample.replyBy }}</span>
+    <div class="rsvp-choices">
+      <button
+        type="button"
+        class="rsvp-choice"
+        [class.is-selected]="answer() === 'accept'"
+        [attr.aria-pressed]="answer() === 'accept'"
+        (click)="answer.set('accept')"
+      >
+        Accept
+      </button>
+      <button
+        type="button"
+        class="rsvp-choice"
+        [class.is-selected]="answer() === 'decline'"
+        [attr.aria-pressed]="answer() === 'decline'"
+        (click)="answer.set('decline')"
+      >
+        Decline
+      </button>
+    </div>
+  </section>
+
+  <p class="credit">Made by Invitely</p>
+</div>
+
+<button
+  type="button"
+  class="cover"
+  [class.is-open]="coverOpen()"
+  [attr.inert]="coverOpen() ? '' : null"
+  (click)="coverOpen.set(true)"
+>
+  <span class="kicker">You are invited</span>
+  <span class="cover__seal">{{ sample.monogram }}</span>
+  <span class="cover__names">{{ sample.first }} {{ sample.joiner }} {{ sample.second }}</span>
+  <span class="cover__open">Open invitation</span>
+</button>

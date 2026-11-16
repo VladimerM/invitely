@@ -1,0 +1,118 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: auto;
+  background: rgba(18, 16, 14, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dialog {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(32px, 5vw, 72px);
+  width: 100%;
+  max-width: 1000px;
+  color: var(--color-paper);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  padding: 10px 18px;
+  border: 1px solid rgba(237, 227, 211, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--color-paper);
+}
+
+// ── Style details ───────────────────────────────────────────────────────
+.details {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+}
+
+.details__kicker {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.details__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1;
+}
+
+.details__description {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--color-sand);
+  text-wrap: pretty;
+}
+
+.swatches {
+  display: flex;
+  gap: 8px;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(237, 227, 211, 0.3);
+  border-radius: 50%;
+}
+
+.details__hint {
+  font-size: 13px;
+  color: var(--color-sand);
+  opacity: 0.8;
+}
+
+.details__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.order {
+  padding: 15px 26px;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+}
+
+.nav {
+  width: 50px;
+  border: 1px solid rgba(237, 227, 211, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 16px;
+  color: var(--color-paper);
+}
+
+app-phone-frame {
+  --phone-shadow: 0 0 0 1px rgba(184, 149, 90, 0.35), 0 60px 120px -30px rgba(0, 0, 0, 0.8);
+}

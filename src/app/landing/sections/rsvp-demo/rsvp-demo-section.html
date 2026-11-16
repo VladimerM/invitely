@@ -1,0 +1,26 @@
+<div class="container section">
+  <div class="section-intro">
+    <div class="section-intro__heading">
+      <app-eyebrow>RSVP, built in</app-eyebrow>
+      <h2 class="display">No more counting replies <em>in group chats.</em></h2>
+    </div>
+    <p class="lede">
+      Guests answer in seconds. You see every response, guest count and note in one place. Try it —
+      send a reply on the left.
+    </p>
+  </div>
+
+  <div class="demo">
+    <div class="demo__guest">
+      <span class="demo__label">What your guest sees</span>
+      <app-phone-frame>
+        <app-guest-reply-card (replied)="addResponse($event)" />
+      </app-phone-frame>
+    </div>
+
+    <div class="demo__host">
+      <span class="demo__label">What you see</span>
+      <app-guest-list-panel [responses]="responses()" [highlightedId]="highlightedId()" />
+    </div>
+  </div>
+</div>

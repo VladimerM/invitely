@@ -1,0 +1,37 @@
+<div class="container section">
+  <div class="heading">
+    <app-eyebrow centered>Packages</app-eyebrow>
+    <h2 class="display">Clear prices, <em>no surprises.</em></h2>
+  </div>
+
+  <div class="packages">
+    @for (pkg of packages; track pkg.name) {
+      <article class="package" [class.package--featured]="pkg.featured">
+        @if (pkg.featured) {
+          <span class="badge">Most chosen</span>
+        }
+        <header class="package__header">
+          <h3 class="package__name">{{ pkg.name }}</h3>
+          <p class="package__tagline">{{ pkg.tagline }}</p>
+        </header>
+        <p class="price">
+          <span class="price__amount">{{ pkg.price }}</span>
+          <span class="price__currency" aria-label="lari">₾</span>
+        </p>
+        <ul class="features">
+          @for (feature of pkg.features; track feature) {
+            <li>{{ feature }}</li>
+          }
+        </ul>
+        <a
+          href="#order"
+          class="btn btn--block choose"
+          [class.btn--gold]="pkg.featured"
+          [class.btn--outline]="!pkg.featured"
+        >
+          Choose {{ pkg.name }}
+        </a>
+      </article>
+    }
+  </div>
+</div>

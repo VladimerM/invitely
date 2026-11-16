@@ -1,0 +1,39 @@
+<header class="toolbar">
+  <div class="toolbar__title">
+    <h3 class="toolbar__heading">Nino &amp; Giorgi · Guest list</h3>
+    <span class="toolbar__meta">Private host page · updates live</span>
+  </div>
+  <span class="toolbar__export">Export to Excel</span>
+</header>
+
+@let totals = stats();
+<dl class="stats">
+  <div class="stat">
+    <dt class="stat__label">Guests attending</dt>
+    <dd class="stat__value">{{ totals.guests }}</dd>
+  </div>
+  <div class="stat">
+    <dt class="stat__label">Replies</dt>
+    <dd class="stat__value">{{ totals.replies }}</dd>
+  </div>
+  <div class="stat">
+    <dt class="stat__label">Declined</dt>
+    <dd class="stat__value">{{ totals.declined }}</dd>
+  </div>
+</dl>
+
+<ul class="rows" aria-live="polite">
+  @for (response of responses(); track response.id) {
+    <li class="row" [class.is-highlighted]="response.id === highlightedId()">
+      <div class="row__who">
+        <span class="row__name">{{ response.name }}</span>
+        <span class="row__when">{{ response.receivedLabel }}</span>
+      </div>
+      <span class="row__status" [class.is-attending]="response.attending">
+        {{ response.attending ? 'Attending' : 'Declined' }}
+      </span>
+      <span class="row__count">{{ response.attending ? response.guests : '—' }}</span>
+      <span class="row__note">{{ response.note || '—' }}</span>
+    </li>
+  }
+</ul>

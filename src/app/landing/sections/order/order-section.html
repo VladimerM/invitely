@@ -1,0 +1,103 @@
+<div class="container layout">
+  <div class="pitch">
+    <img class="mark" ngSrc="assets/mark-light.png" width="286" height="242" alt="" />
+    <h2 class="display headline">Let’s create your <em>invitation.</em></h2>
+    <p class="pitch__text">
+      Message us directly — we usually reply within the hour, in Georgian or English.
+    </p>
+    @if (showMessaging) {
+      <div class="channels">
+        @for (channel of channels; track channel.label) {
+          <a
+            class="btn channel"
+            [class.btn--gold]="channel.primary"
+            [class.btn--outline-light]="!channel.primary"
+            [class.channel--primary]="channel.primary"
+            [href]="channel.href"
+          >
+            {{ channel.label }}
+          </a>
+        }
+      </div>
+    }
+  </div>
+
+  @if (showForm) {
+    <div class="panel">
+      @if (order.isSent()) {
+        <div class="sent" role="status">
+          <span class="diamond sent__diamond" aria-hidden="true"></span>
+          <span class="sent__title">Thank you, {{ order.firstName() }}.</span>
+          <span class="sent__text">
+            We’ll call or message you shortly to talk through your {{ order.eventLabel() }}.
+          </span>
+        </div>
+      } @else {
+        <form class="form" [formRoot]="orderForm" aria-labelledby="order-form-title">
+          <h3 class="form__title" id="order-form-title">Or leave your details</h3>
+
+          @let name = orderForm.name();
+          <label class="field">
+            Your name
+            <input
+              class="field__control"
+              type="text"
+              autocomplete="name"
+              placeholder="Nino Beridze"
+              [formField]="orderForm.name"
+              [class.is-invalid]="name.touched() && name.invalid()"
+              aria-describedby="order-name-error"
+            />
+            @if (name.touched() && name.invalid()) {
+              <span class="field__error" id="order-name-error">{{ name.errors()[0].message }}</span>
+            }
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              Event type
+              <select class="field__control" [formField]="orderForm.event">
+                @for (occasion of occasions; track occasion) {
+                  <option [value]="occasion">{{ occasion }}</option>
+                }
+              </select>
+            </label>
+            <label class="field">
+              Event date
+              <input
+                class="field__control field__control--date"
+                type="date"
+                [formField]="orderForm.date"
+              />
+            </label>
+          </div>
+
+          @let phone = orderForm.phone();
+          <label class="field">
+            Phone
+            <input
+              class="field__control"
+              type="tel"
+              autocomplete="tel"
+              placeholder="+995 5__ __ __ __"
+              [formField]="orderForm.phone"
+              [class.is-invalid]="phone.touched() && phone.invalid()"
+              aria-describedby="order-phone-error"
+            />
+            @if (phone.touched() && phone.invalid()) {
+              <span class="field__error" id="order-phone-error">{{
+                phone.errors()[0].message
+              }}</span>
+            }
+          </label>
+
+          @if (order.chosenStyle(); as style) {
+            <span class="form__style">Style: {{ style }}</span>
+          }
+
+          <button type="submit" class="btn btn--block submit">Request my invitation</button>
+        </form>
+      }
+    </div>
+  }
+</div>

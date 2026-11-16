@@ -1,0 +1,54 @@
+// Section headline. Emphasised words render in italic gold.
+.display {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+
+  em {
+    color: var(--color-gold);
+    font-weight: 400;
+  }
+}
+
+.lede {
+  margin: 0;
+  max-width: 380px;
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--color-body);
+  text-wrap: pretty;
+
+  .band--dark & {
+    color: var(--color-sand);
+  }
+}
+
+// Diamond ornament used as a bullet and divider throughout the brand.
+.diamond {
+  display: inline-block;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+// Hatched stand-in for client photography.
+.photo-placeholder {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 14px;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--stripe, rgba(140, 127, 112, 0.2)) 0 1px,
+    transparent 1px 9px
+  );
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
