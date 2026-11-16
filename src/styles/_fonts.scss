@@ -14,7 +14,7 @@ $georgian-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2
   font-style: normal;
   font-weight: 400 500;
   font-display: swap;
-  src: url('/assets/fonts/noto-serif-georgian.woff2') format('woff2');
+  src: url('./fonts/noto-serif-georgian.woff2') format('woff2');
   unicode-range: $georgian-range;
   size-adjust: 70%;
 }
@@ -25,7 +25,7 @@ $georgian-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2
   font-style: normal;
   font-weight: 400 500;
   font-display: swap;
-  src: url('/assets/fonts/noto-serif-georgian.woff2') format('woff2');
+  src: url('./fonts/noto-serif-georgian.woff2') format('woff2');
   unicode-range: $georgian-range;
   size-adjust: 90%;
 }
